@@ -164,8 +164,6 @@ Hoisting
 (function(){
   "use strict";
 
-  pizza.pizzaMkr();
-
   var pizza = {
     sauce: "",
     orderNow: "",
@@ -178,6 +176,12 @@ Hoisting
       }
     }
   }
+  pizza.sauceType = 'tomato';
+  pizza.protein = 'chicken';
+  pizza.orderNow = true;
+  pizza.sauce = true;
+
+  pizza.pizzaMkr();
 
   console.log("# 7 pizza.pizzaMrk()", pizza.pizzaMkr());
   console.assert(pizza.pizzaMkr() == "We are making your pizza with tomato and chicken. Pickup in 20 minutes.", "#7 Test failed. Did you add the propeties? Did you set the values correctly? Did you fix the hoisting issues?")
@@ -213,12 +217,16 @@ HINTS:
   //Do not modify 'name' globaly.
   var name = null;
 
-  accountCheck();
-
-  var benefit = {}
+  var benefit = {};
   //Add properties to 'benefit' using braket notation
+  benefit['credit'] = 50;
+  benefit['discount'] = 5;
 
   var accountCheck = function() {
+
+    name = "James";
+    goodStanding = true;
+    monthsActive = 18;
 
     var greeting = function() {
 
@@ -257,7 +265,10 @@ HINTS:
       }
     }
     //Here 'accountCheck' should return both the 'greeting' output and the 'accountStat' output.
+    return greeting() + ' ' + accountStat();
   }
+
+  accountCheck();
 
   console.log("#8 accountCheck():", accountCheck());
   console.assert(name == "James", "Test failed. You should set 'name' to 'james' from within accountCheck()");
@@ -278,11 +289,13 @@ Compartmentalization
   "use strict";
   var multiply = 2 * 8;
 
-  function duplicate() {
+  function isolate(){
+    function duplicate() {
     multiply = 2 * 10;
   };
 
   duplicate();
+}
 
   console.log( "multiply", multiply );
   console.assert( multiply == 16, "Test failed. How can we isolate duplication()" );
